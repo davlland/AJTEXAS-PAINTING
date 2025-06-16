@@ -18,8 +18,8 @@ const Header = () => {
     <header 
       className={`fixed w-full z-50 transition-all duration-300 ${
         isScrolled 
-          ? 'bg-white/95 backdrop-blur-sm shadow-lg py-2' 
-          : 'bg-white py-4'
+          ? 'bg-fondo/95 backdrop-blur-sm shadow-lg py-2' 
+          : 'bg-fondo py-4'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4">
@@ -31,21 +31,21 @@ const Header = () => {
               className="group relative"
               aria-label="Ir a inicio"
             >
-              <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent transition-all duration-300 group-hover:from-blue-800 group-hover:to-blue-600">
+              <h1 className="text-2xl font-bold bg-gradient-to-r from-primario to-secundario bg-clip-text text-transparent transition-all duration-300 group-hover:from-secundario group-hover:to-primario">
                 AJ TEXAS PAINTING
               </h1>
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primario transition-all duration-300 group-hover:w-full"></span>
             </Link>
 
             {/* Botón de menú móvil */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="lg:hidden p-2 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="lg:hidden p-2 rounded-md hover:bg-acento2 focus:outline-none focus:ring-2 focus:ring-primario"
               aria-expanded={isMenuOpen}
               aria-label="Menú de navegación"
             >
               <svg 
-                className="w-6 h-6 text-gray-600" 
+                className="w-6 h-6 text-neutroOscuro" 
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
@@ -69,7 +69,7 @@ const Header = () => {
               <li>
                 <Link 
                   to="/" 
-                  className="relative text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
+                  className="relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full"
                   aria-current="page"
                 >
                   Inicio
@@ -78,7 +78,7 @@ const Header = () => {
               <li>
                 <a 
                   href="#servicios" 
-                  className="relative text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
+                  className="relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Servicios
                 </a>
@@ -86,7 +86,7 @@ const Header = () => {
               <li>
                 <a 
                   href="#galeria" 
-                  className="relative text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
+                  className="relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Galería
                 </a>
@@ -94,7 +94,7 @@ const Header = () => {
               <li>
                 <a 
                   href="#sobre-nosotros" 
-                  className="relative text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
+                  className="relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Sobre Nosotros
                 </a>
@@ -102,7 +102,7 @@ const Header = () => {
               <li>
                 <Link 
                   to="/contacto" 
-                  className="relative text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-blue-600 after:transition-all after:duration-300 hover:after:w-full"
+                  className="relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Contacto
                 </Link>
@@ -110,7 +110,7 @@ const Header = () => {
               <li>
                 <Link 
                   to="/trabaja" 
-                  className="inline-block px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                  className="inline-block px-6 py-2 bg-primario text-fondo rounded-md hover:bg-secundario transform hover:scale-105 transition-all duration-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primario focus:ring-offset-2"
                 >
                   Trabaja con Nosotros
                 </Link>

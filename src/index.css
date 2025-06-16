@@ -9,7 +9,7 @@
   }
   
   body {
-    @apply antialiased text-gray-800 bg-white min-h-screen;
+    @apply antialiased text-primario bg-fondo min-h-screen;
   }
 }
 
