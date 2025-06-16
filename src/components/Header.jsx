@@ -39,9 +39,14 @@ const Header = () => {
           <div className="w-full lg:w-auto flex justify-between items-center">
             <Link 
               to="/" 
-              className="group relative"
+              className="group relative flex items-center gap-4"
               aria-label="Ir a inicio"
             >
+              <img 
+                src="/images/logo.png" 
+                alt="AJ Texas Painting Logo" 
+                className="h-10 w-auto object-contain"
+              />
               <h1 className="text-2xl font-bold bg-gradient-to-r from-primario to-secundario bg-clip-text text-transparent transition-all duration-300 group-hover:from-secundario group-hover:to-primario">
                 AJ TEXAS PAINTING
               </h1>
