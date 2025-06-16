@@ -4,14 +4,25 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isServicesOpen, setIsServicesOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Cierra el menú de servicios al hacer scroll o cambiar de tamaño
+  useEffect(() => {
+    const closeDropdown = () => setIsServicesOpen(false);
+    window.addEventListener('scroll', closeDropdown);
+    window.addEventListener('resize', closeDropdown);
+    return () => {
+      window.removeEventListener('scroll', closeDropdown);
+      window.removeEventListener('resize', closeDropdown);
+    };
   }, []);
 
   return (
@@ -75,13 +86,45 @@ const Header = () => {
                   Inicio
                 </Link>
               </li>
-              <li>
-                <a 
-                  href="#servicios" 
-                  className="relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full"
+              {/* Menú de Servicios con hover en desktop y click en móvil */}
+              <li className="relative group lg:static">
+                <button
+                  type="button"
+                  className="flex items-center gap-1 relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full focus:outline-none"
+                  aria-haspopup="true"
+                  aria-expanded={isServicesOpen}
+                  onClick={() => setIsServicesOpen((open) => !open)}
+                  onMouseEnter={() => window.innerWidth >= 1024 && setIsServicesOpen(true)}
+                  onMouseLeave={() => window.innerWidth >= 1024 && setIsServicesOpen(false)}
                 >
                   Servicios
-                </a>
+                  <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
+                </button>
+                {/* Menú desplegable */}
+                <div
+                  onMouseEnter={() => window.innerWidth >= 1024 && setIsServicesOpen(true)}
+                  onMouseLeave={() => window.innerWidth >= 1024 && setIsServicesOpen(false)}
+                  className={`absolute left-1/2 -translate-x-1/2 mt-0 w-48 bg-fondo rounded-lg shadow-lg overflow-hidden transition-all duration-300 transform origin-top z-40
+                    ${isServicesOpen ? 'opacity-100 scale-100 translate-y-0 pointer-events-auto' : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}
+                  `}
+                >
+                  <div className="py-2">
+                    <a 
+                      href="#paint-texturing" 
+                      className="block px-4 py-2 text-neutroOscuro hover:bg-acento2 hover:text-primario transition-colors duration-200"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      Paint & Texturing
+                    </a>
+                    <a 
+                      href="#make-ready" 
+                      className="block px-4 py-2 text-neutroOscuro hover:bg-acento2 hover:text-primario transition-colors duration-200"
+                      onClick={() => setIsServicesOpen(false)}
+                    >
+                      Make Ready
+                    </a>
+                  </div>
+                </div>
               </li>
               <li>
                 <a 
