@@ -151,14 +151,14 @@ const Header = () => {
                 >
                   <div className="py-2">
                     <a
-                      href="#paint-texturing"
+                      href="/services#paint-texturing"
                       className="block px-4 py-2 text-neutroOscuro hover:bg-acento2 hover:text-primario transition-colors duration-200"
                       onClick={() => setIsServicesOpen(false)}
                     >
                       Paint & Texturing
                     </a>
                     <a
-                      href="#make-ready"
+                      href="/services#make-ready"
                       className="block px-4 py-2 text-neutroOscuro hover:bg-acento2 hover:text-primario transition-colors duration-200"
                       onClick={() => setIsServicesOpen(false)}
                     >
@@ -169,7 +169,7 @@ const Header = () => {
               </li>
               <li>
                 <a
-                  href="#galeria"
+                  href="/galeria"
                   className="relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Galería
@@ -177,7 +177,7 @@ const Header = () => {
               </li>
               <li>
                 <a
-                  href="#sobre-nosotros"
+                  href="/sobre-nosotros"
                   className="relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full"
                 >
                   Sobre Nosotros

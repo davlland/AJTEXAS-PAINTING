@@ -29,6 +29,9 @@ function App() {
         <Route path="/contacto" element={<Contact />} />
         <Route path="/trabaja" element={<Careers />} />
         <Route path="/color-picker" element={<ColorPage />} />
+        <Route path="/galeria" element={<Gallery />} />
+        <Route path="/sobre-nosotros" element={<About />} />
+        <Route path="/servicios" element={<Services />} />
       </Routes>
       <Footer />
     </Router>
