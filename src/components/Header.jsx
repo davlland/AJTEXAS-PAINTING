@@ -163,6 +163,14 @@ const Header = () => {
                   Trabaja con Nosotros
                 </Link>
               </li>
+              <li>
+                <Link 
+                  to="/paleta-colores"
+                  className="relative text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full"
+                >
+                  Paleta de Colores
+                </Link>
+              </li>
             </ul>
           </nav>
         </div>

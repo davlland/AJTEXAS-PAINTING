@@ -8,6 +8,7 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Careers from './components/Careers';
 import Footer from './components/Footer';
+import ColorPicker from './components/ColorPicker';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/' element={<><Hero /><Services /><Gallery /><About /></>} />
         <Route path='/contacto' element={<Contact />} />
         <Route path='/trabaja' element={<Careers />} />
+        <Route path='/paleta-colores' element={<ColorPicker />} />
       </Routes>
       <Footer />
     </Router>
