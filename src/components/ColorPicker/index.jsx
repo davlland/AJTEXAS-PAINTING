@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import ColorInfo from './ColorInfo';
-import ColorScheme from './ColorScheme';
-import ColorControls from './ColorControls';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
+import ColorInfo from "./ColorInfo";
+import ColorScheme from "./ColorScheme";
+import ColorControls from "./ColorControls";
 
 const ColorPicker = () => {
   const [loading, setLoading] = useState(false);
@@ -15,11 +15,11 @@ const ColorPicker = () => {
       setLoading(true);
       setError(null);
       const response = await axios.get(`https://www.thecolorapi.com/id`, {
-        params: { hex, format: 'json' }
+        params: { hex, format: "json" },
       });
       setColorInfo(response.data);
     } catch (err) {
-      setError('Error al obtener información del color');
+      setError("Error al obtener información del color");
       console.error(err);
     } finally {
       setLoading(false);
@@ -31,11 +31,11 @@ const ColorPicker = () => {
       setLoading(true);
       setError(null);
       const response = await axios.get(`https://www.thecolorapi.com/scheme`, {
-        params: { hex: color, mode, count, format: 'json' }
+        params: { hex: color, mode, count, format: "json" },
       });
       setScheme(response.data);
     } catch (err) {
-      setError('Error al generar el esquema de colores');
+      setError("Error al generar el esquema de colores");
       console.error(err);
     } finally {
       setLoading(false);

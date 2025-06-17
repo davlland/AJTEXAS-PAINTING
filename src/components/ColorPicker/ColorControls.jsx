@@ -1,16 +1,23 @@
+import { useState } from "react";
 
-const ColorControls = ({ onSubmit, modes = ['monochrome', 'analogic', 'complement', 'triad', 'quad'] }) => {
-  const [color, setColor] = useState('#1E4D8C');
-  const [mode, setMode] = useState('analogic');
+const ColorControls = ({
+  onSubmit,
+  modes = ["monochrome", "analogic", "complement", "triad", "quad"],
+}) => {
+  const [color, setColor] = useState("#1E4D8C");
+  const [mode, setMode] = useState("analogic");
   const [count, setCount] = useState(5);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ color: color.replace('#', ''), mode, count });
+    onSubmit({ color: color.replace("#", ""), mode, count });
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 bg-white rounded-lg shadow-lg p-6">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 bg-white rounded-lg shadow-lg p-6"
+    >
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
           Color Base
@@ -34,16 +41,16 @@ const ColorControls = ({ onSubmit, modes = ['monochrome', 'analogic', 'complemen
       </div>
 
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Modo
-        </label>
+        <label className="block text-sm font-medium text-gray-700">Modo</label>
         <select
           value={mode}
           onChange={(e) => setMode(e.target.value)}
           className="w-full px-3 py-2 border rounded-md"
         >
           {modes.map((m) => (
-            <option key={m} value={m}>{m}</option>
+            <option key={m} value={m}>
+              {m}
+            </option>
           ))}
         </select>
       </div>
