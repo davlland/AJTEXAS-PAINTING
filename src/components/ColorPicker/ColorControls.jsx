@@ -1,4 +1,3 @@
-import React, { useState } from 'react';
 
 const ColorControls = ({ onSubmit, modes = ['monochrome', 'analogic', 'complement', 'triad', 'quad'] }) => {
   const [color, setColor] = useState('#1E4D8C');

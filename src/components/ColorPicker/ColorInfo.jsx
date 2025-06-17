@@ -1,6 +1,4 @@
 import React from 'react';
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-
 const ColorInfo = ({ color }) => {
   if (!color) return null;
 
@@ -23,11 +21,11 @@ const ColorInfo = ({ color }) => {
         {['hex', 'rgb', 'hsl', 'cmyk'].map((format) => (
           <div key={format} className="flex items-center justify-between">
             <span className="uppercase text-sm font-medium">{format}:</span>
-            <CopyToClipboard text={color[format].value}>
-              <button className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded transition-colors">
+           
+              <button onClick={()=>navigator.clipboard.writeText(color)} className="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded transition-colors">
                 {color[format].value}
               </button>
-            </CopyToClipboard>
+          
           </div>
         ))}
       </div>
