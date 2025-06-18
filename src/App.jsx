@@ -8,8 +8,9 @@ import MakeReady from "./components/Services/MakeReady";
 import Gallery from "./components/Gallery";
 import About from "./components/About";
 import Contact from "./components/Contact";
-import Careers from "./components/Careers";
 import ColorPage from "./components/ColorPage";
+import CareersForm from "./components/CareersForm";
+// import Careers from "./components/Careers";
 
 function App() {
   return (
@@ -24,8 +25,9 @@ function App() {
           <Route path="galeria" element={<Gallery />} />
           <Route path="sobre-nosotros" element={<About />} />
           <Route path="contacto" element={<Contact />} />
-          <Route path="trabaja" element={<Careers />} />
+          <Route path="trabaja" element={<CareersForm />} />
           <Route path="color-picker" element={<ColorPage />} />
+          {/* <Route path="empleo" element={<CareersForm />} /> */}
         </Route>
       </Routes>
     </Router>
