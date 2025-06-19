@@ -16,7 +16,7 @@ const videos = {
   "basic-make-ready": "/videos/basic-make-ready.mp4",
   "make-ready-upgrades": "/videos/make-ready-upgrades.mp4",
   "re-caulking": "/videos/re-caulking.mp4",
-  "furniture-trash-outs": "/videos/furniture-trash-outs.mp4",
+  "furniture-trash-outs": "/videos/furniture.mp4",
 };
 
 const MakeReady = () => {
