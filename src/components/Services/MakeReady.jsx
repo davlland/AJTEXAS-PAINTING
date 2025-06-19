@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 const items = [
   { key: "appliance-installations", label: "Appliance Installations" },
@@ -44,18 +45,35 @@ const MakeReady = () => {
           ))}
         </nav>
       </aside>
-      <section className="flex-1 min-w-0">
+      <section className="flex-1 min-w-0 flex flex-col items-center">
         <h4 className="text-2xl font-bold text-primario mb-4">{items.find(i => i.key === selected)?.label}</h4>
         {videoUrl ? (
-          <div className="w-full max-w-3xl mx-auto rounded overflow-hidden shadow-lg">
-            <video
-              src={videoUrl}
-              controls
-              className="w-full h-80 object-cover bg-black rounded"
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.6 }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="w-full flex justify-center"
+          >
+            <div
+              className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg bg-black p-6"
+              style={{
+                background: "linear-gradient(135deg, #e3f0ff 0%, #fafdff 100%)",
+                transition: "all 0.4s ease",
+              }}
             >
-              Tu navegador no soporta la reproducción de video.
-            </video>
-          </div>
+              <motion.video
+                src={videoUrl}
+                controls
+                className="w-full"
+                style={{ height: "31.25rem", maxHeight: "80vh" }} // 400px * 1.3 = 520px aprox
+                whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
+                transition={{ duration: 0.4, ease: "ease" }}
+              >
+                Tu navegador no soporta la reproducción de video.
+              </motion.video>
+            </div>
+          </motion.div>
         ) : (
           <div className="text-neutroOscuro">Agrega la ruta del video para este servicio en el objeto <b>videos</b>.</div>
         )}
