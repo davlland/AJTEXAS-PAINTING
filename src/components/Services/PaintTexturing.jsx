@@ -1,10 +1,81 @@
-import React from "react";
+import React, { useState } from "react";
 
-const PaintTexturing = () => (
-  <div>
-    <h3 className="text-2xl font-bold text-primario mb-2">Paint & Texturing</h3>
-    <p className="text-neutroOscuro">Contenido de la subruta Paint & Texturing.</p>
-  </div>
-);
+const items = [
+  { key: "full-paints", label: "Full Paints" },
+  { key: "color-change", label: "Color Change" },
+  { key: "cabinet-painting", label: "Cabinet Painting" },
+  { key: "door-painting", label: "Door Painting" },
+  { key: "paint-accent-walls", label: "Paint Accent Walls" },
+  { key: "paint-ceilings", label: "Paint Ceilings" },
+  { key: "paint-garages", label: "Paint Garages" },
+  { key: "baseboard-trim-painting", label: "Baseboard/Trim Painting" },
+  { key: "tbt-repairs", label: "T.B.T. Repairs" },
+  { key: "kilz-painting", label: "KILZ Painting" },
+  { key: "interior-painting", label: "Interior Painting" },
+  { key: "apartment-painters", label: "Apartment Painters" },
+  { key: "home-painters", label: "Home Painters" },
+];
+
+// Cambia las rutas por tus videos reales
+const videos = {
+  "full-paints": "/videos/full-painting.mp4",
+  "color-change": "/videos/color-change.mp4",
+  "cabinet-painting": "/videos/cabinet-painting.mp4",
+  "door-painting": "/videos/door-painting.mp4",
+  "paint-accent-walls": "/videos/paint-accent-walls.mp4",
+  "paint-ceilings": "/videos/paint-ceilings.mp4",
+  "paint-garages": "/videos/paint-garages.mp4",
+  "baseboard-trim-painting": "/videos/baseboard.mp4",
+  "tbt-repairs": "/videos/tbt-repairs.mp4",
+  "kilz-painting": "/videos/kilz-painting.mp4",
+  "interior-painting": "/videos/interior-painting.mp4",
+  "apartment-painters": "/videos/apartment-painters.mp4",
+  "home-painters": "/videos/home-painters.mp4",
+};
+
+const PaintTexturing = () => {
+  const [selected, setSelected] = useState(items[0].key);
+  const videoUrl = videos[selected];
+
+  return (
+    <div className="lg:flex gap-8">
+      <aside className="mb-6 lg:mb-0 lg:w-64">
+        <h3 className="text-xl font-bold text-primario mb-4">Paint & Texturing</h3>
+        <nav className="flex flex-col gap-2">
+          {items.map((item) => (
+            <button
+              key={item.key}
+              onClick={() => setSelected(item.key)}
+              className={`px-4 py-2 rounded transition-colors font-medium text-left text-base focus:outline-none focus:ring-2 focus:ring-primario ${
+                selected === item.key
+                  ? "bg-primario text-fondo shadow"
+                  : "text-neutroOscuro hover:bg-acento2 hover:text-primario"
+              }`}
+              type="button"
+            >
+              {item.label}
+            </button>
+          ))}
+        </nav>
+      </aside>
+      <section className="flex-1 min-w-0">
+        <h4 className="text-2xl font-bold text-primario mb-4">{items.find(i => i.key === selected)?.label}</h4>
+        {videoUrl ? (
+          <div className="w-full max-w-3xl mx-auto rounded overflow-hidden shadow-lg">
+            <video
+              src={videoUrl}
+              controls
+              className="w-full h-80 object-cover bg-black rounded"
+            >
+              Tu navegador no soporta la reproducción de video.
+            </video>
+          </div>
+        ) : (
+          <div className="text-neutroOscuro">Agrega la ruta del video para este servicio en el objeto <b>videos</b>.</div>
+        )}
+      </section>
+    </div>
+  );
+};
 
 export default PaintTexturing; 
