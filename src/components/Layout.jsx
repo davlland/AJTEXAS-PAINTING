@@ -36,11 +36,15 @@ const Layout = () => {
               onMouseEnter={handleMouseEnter}
               onMouseLeave={handleMouseLeave}
             >
-              <NavLink to="/servicios" className={({ isActive }) =>
-                `relative transition-all duration-200 px-1 ${isActive ? "text-primario font-bold" : "text-neutroOscuro hover:text-primario"} after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full`}
+              <button
+                type="button"
+                className="relative transition-all duration-200 px-1 text-neutroOscuro hover:text-primario font-medium after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primario after:transition-all after:duration-300 hover:after:w-full focus:outline-none"
+                aria-haspopup="true"
+                aria-expanded={isServicesOpen}
+                onClick={() => setIsServicesOpen((open) => !open)}
               >
                 Servicios
-              </NavLink>
+              </button>
               <div
                 className={`absolute left-0 mt-2 bg-fondo rounded shadow-2xl z-10 min-w-[200px] transition-all duration-500 origin-top transform
                   ${isServicesOpen ? "opacity-100 scale-100 pointer-events-auto" : "opacity-0 scale-75 pointer-events-none"}`}

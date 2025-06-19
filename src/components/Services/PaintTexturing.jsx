@@ -77,6 +77,7 @@ const PaintTexturing = () => {
               }}
             >
               <motion.video
+                key={videoUrl}
                 src={videoUrl}
                 controls
                 className="w-full"
