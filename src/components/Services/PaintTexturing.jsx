@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 
 const items = [
@@ -45,8 +45,15 @@ const PaintTexturing = () => {
       if (videoRef.current) {
         videoRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    }, 100); // Espera breve para asegurar el render
+    }, 100);
   };
+
+  useEffect(() => {
+    if (videoRef.current && videoUrl) {
+      videoRef.current.load();
+      videoRef.current.play().catch(() => {});
+    }
+  }, [videoUrl]);
 
   return (
     <div className="lg:flex gap-8">
@@ -69,7 +76,7 @@ const PaintTexturing = () => {
           ))}
         </nav>
       </aside>
-      <section className="flex-1 min-w-0 flex flex-col items-center" ref={videoRef}>
+      <section className="flex-1 min-w-0 flex flex-col items-center">
         <h4 className="text-2xl font-bold text-primario mb-4">{items.find(i => i.key === selected)?.label}</h4>
         {videoUrl ? (
           <motion.div
@@ -87,11 +94,11 @@ const PaintTexturing = () => {
               }}
             >
               <motion.video
-                key={videoUrl}
+                ref={videoRef}
                 src={videoUrl}
                 controls
                 className="w-full"
-                style={{ height: "31.25rem", maxHeight: "80vh" }} // 400px * 1.3 = 520px aprox
+                style={{ height: "31.25rem", maxHeight: "80vh" }}
                 whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
                 transition={{ duration: 0.4, ease: "ease" }}
               >

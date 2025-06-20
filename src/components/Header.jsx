@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 function useMediaQuery(query) {
@@ -26,8 +26,37 @@ const Header = () => {
   const isMobile = useMediaQuery('(max-width: 1023px)');
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [activeMenuItem, setActiveMenuItem] = useState(null);
+  const [isServicesOpenDesktop, setIsServicesOpenDesktop] = useState(false);
+  const servicesLiRef = useRef(null);
+  const servicesButtonRef = useRef(null);
 
   useEffect(() => { if (!isMobile) setMenuOpen(false); }, [isMobile]);
+
+  useEffect(() => {
+    if (!isServicesOpenDesktop) return;
+    function handleClickOutside(event) {
+      if (
+        servicesLiRef.current &&
+        !servicesLiRef.current.contains(event.target) &&
+        servicesButtonRef.current &&
+        !servicesButtonRef.current.contains(event.target)
+      ) {
+        setIsServicesOpenDesktop(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isServicesOpenDesktop]);
+
+  useEffect(() => {
+    if (!isServicesOpenDesktop) return;
+    function handleEsc(e) {
+      if (e.key === 'Escape') setIsServicesOpenDesktop(false);
+    }
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [isServicesOpenDesktop]);
 
   return (
     <header className="fixed w-full z-50 bg-fondo/95 backdrop-blur-sm shadow-lg py-2 transition-all duration-300">
@@ -51,7 +80,7 @@ const Header = () => {
               <div className="fixed inset-0 bg-black/40 z-50" onClick={() => setMenuOpen(false)} />
             )}
             <nav
-              className={`fixed top-0 right-0 h-full w-64 bg-fondo shadow-lg z-50 transform ${menuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-200`}
+              className={`fixed top-0 right-0 h-full w-64 bg-gray-300 shadow-lg z-50 transform ${menuOpen ? 'translate-x-0' : 'translate-x-full'} transition-transform duration-200`}
               style={{ transitionProperty: 'transform' }}
             >
               <button
@@ -59,22 +88,30 @@ const Header = () => {
                 className="absolute top-4 right-4 text-2xl p-2 rounded hover:bg-acento2"
                 aria-label="Cerrar menú"
               >×</button>
-              <ul className="flex flex-col gap-6 mt-20 px-8">
-                {navLinks.map(link => (
-                  <li key={link.to}>
-                    <Link
-                      to={link.to}
-                      className="block text-neutroOscuro hover:text-primario text-xl font-medium py-2"
-                      onClick={() => setMenuOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-                <li>
+              <ul
+                className={`flex flex-col gap-6 mt-20 px-8 bg-gradient-to-b from-[#d0d3d6] via-gray-200/80 to-gray-200/80 transition-all duration-300 ease-out transform ${menuOpen ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8 pointer-events-none'}`}
+              >
+                <li key={navLinks[0].to}>
+                  <Link
+                    to={navLinks[0].to}
+                    className={`block text-neutroOscuro text-xl font-medium py-2 rounded transition-colors duration-200 ${activeMenuItem === navLinks[0].to ? 'bg-primario/80 text-white' : ''}`}
+                    onClick={() => {
+                      setActiveMenuItem(navLinks[0].to);
+                      setTimeout(() => setActiveMenuItem(null), 200);
+                      setMenuOpen(false);
+                    }}
+                  >
+                    {navLinks[0].label}
+                  </Link>
+                </li>
+                <li key="servicios-menu">
                   <button
-                    className="block w-full text-left text-neutroOscuro hover:text-primario text-xl font-medium py-2 flex items-center justify-between"
-                    onClick={() => setServicesOpen((v) => !v)}
+                    className={`block w-full text-left text-neutroOscuro text-xl font-medium py-2 flex items-center justify-between rounded transition-colors duration-200 ${activeMenuItem === 'servicios' ? 'bg-primario/80 text-white' : ''}`}
+                    onClick={() => {
+                      setActiveMenuItem('servicios');
+                      setTimeout(() => setActiveMenuItem(null), 200);
+                      setServicesOpen((v) => !v);
+                    }}
                     aria-expanded={servicesOpen}
                     aria-controls="mobile-services-submenu"
                   >
@@ -86,52 +123,99 @@ const Header = () => {
                     className={`overflow-hidden transition-all duration-200 pl-4 ${servicesOpen ? 'max-h-32 opacity-100' : 'max-h-0 opacity-0'}`}
                     style={{ pointerEvents: servicesOpen ? 'auto' : 'none' }}
                   >
-                    <li>
-                      <Link
-                        to="/servicios/paint-texturing"
-                        className="block py-1 text-neutroOscuro hover:text-primario"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Paint & Texturing
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/servicios/make-ready"
-                        className="block py-1 text-neutroOscuro hover:text-primario"
-                        onClick={() => setMenuOpen(false)}
-                      >
-                        Make Ready
-                      </Link>
-                    </li>
+                    {[
+                      { to: '/servicios/paint-texturing', label: 'Paint & Texturing' },
+                      { to: '/servicios/make-ready', label: 'Make Ready' },
+                    ].map(link => (
+                      <li key={link.to}>
+                        <Link
+                          to={link.to}
+                          className={`block py-1 text-neutroOscuro rounded transition-colors duration-200 ${activeMenuItem === link.to ? 'bg-primario/80 text-white' : ''}`}
+                          onClick={() => {
+                            setActiveMenuItem(link.to);
+                            setTimeout(() => setActiveMenuItem(null), 200);
+                            setMenuOpen(false);
+                          }}
+                        >
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
                   </ul>
                 </li>
+                {navLinks.slice(1).map(link => (
+                  link.label !== 'Inicio' && (
+                    <li key={link.to}>
+                      <Link
+                        to={link.to}
+                        className={`block text-neutroOscuro text-xl font-medium py-2 rounded transition-colors duration-200 ${activeMenuItem === link.to ? 'bg-primario/80 text-white' : ''}`}
+                        onClick={() => {
+                          setActiveMenuItem(link.to);
+                          setTimeout(() => setActiveMenuItem(null), 200);
+                          setMenuOpen(false);
+                        }}
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  )
+                ))}
               </ul>
             </nav>
           </>
         ) : (
           <nav>
             <ul className="flex flex-row items-center gap-6">
-              <li className="relative group">
-                <button className="flex items-center gap-1 text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 focus:outline-none">
+              <li key={navLinks[0].to}>
+                <Link to={navLinks[0].to} className="text-neutroOscuro hover:text-primario font-medium transition-colors duration-200">
+                  {navLinks[0].label}
+                </Link>
+              </li>
+              <li
+                className="relative"
+                key="servicios-desktop"
+                ref={servicesLiRef}
+              >
+                <button
+                  ref={servicesButtonRef}
+                  className="flex items-center gap-1 text-neutroOscuro hover:text-primario font-medium transition-colors duration-200 focus:outline-none"
+                  onClick={() => setIsServicesOpenDesktop((v) => !v)}
+                  aria-haspopup="true"
+                  aria-expanded={isServicesOpenDesktop}
+                  type="button"
+                >
                   Servicios
                   <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div className="absolute left-1/2 -translate-x-1/2 mt-2 w-48 bg-fondo rounded-lg shadow-lg overflow-hidden z-40 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200">
+                <div
+                  className={`absolute left-1/2 -translate-x-1/2 mt-2 w-56 bg-fondo rounded-lg shadow-lg overflow-hidden z-50 transition-opacity duration-200 ${isServicesOpenDesktop ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+                  style={{ minWidth: '12rem' }}
+                  onClick={e => e.stopPropagation()}
+                >
                   <div className="py-2">
-                    <Link to="/services#paint-texturing" className="block px-4 py-2 text-neutroOscuro hover:bg-acento2 hover:text-primario">Paint & Texturing</Link>
-                    <Link to="/services#make-ready" className="block px-4 py-2 text-neutroOscuro hover:bg-acento2 hover:text-primario">Make Ready</Link>
+                    <Link
+                      to="/servicios/paint-texturing"
+                      className="block px-4 py-2 text-neutroOscuro hover:bg-acento2 hover:text-primario transition-colors duration-150"
+                      onClick={() => setIsServicesOpenDesktop(false)}
+                    >Paint & Texturing</Link>
+                    <Link
+                      to="/servicios/make-ready"
+                      className="block px-4 py-2 text-neutroOscuro hover:bg-acento2 hover:text-primario transition-colors duration-150"
+                      onClick={() => setIsServicesOpenDesktop(false)}
+                    >Make Ready</Link>
                   </div>
                 </div>
               </li>
-              {navLinks.map(link => (
-                <li key={link.to}>
-                  <Link to={link.to} className="text-neutroOscuro hover:text-primario font-medium transition-colors duration-200">
-                    {link.label}
-                  </Link>
-                </li>
+              {navLinks.slice(1).map(link => (
+                link.label !== 'Inicio' && (
+                  <li key={link.to}>
+                    <Link to={link.to} className="text-neutroOscuro hover:text-primario font-medium transition-colors duration-200">
+                      {link.label}
+                    </Link>
+                  </li>
+                )
               ))}
             </ul>
           </nav>
