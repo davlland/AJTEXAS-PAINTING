@@ -18,3 +18,35 @@
     @apply max-w-7xl mx-auto px-4;
   }
 }
+
+/* Responsive: móvil y tablet */
+@media (max-width: 639px) {
+  img, video {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  button, a.button, .btn {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1rem;
+  }
+  h1, h2, h3, h4 {
+    font-size: 90%;
+  }
+}
+@media (min-width: 640px) and (max-width: 1023px) {
+  img, video {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  button, a.button, .btn {
+    min-width: 44px;
+    min-height: 44px;
+    font-size: 1.05rem;
+  }
+  h1, h2, h3, h4 {
+    font-size: 95%;
+  }
+}
