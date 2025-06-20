@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { motion } from "framer-motion";
 
 const items = [
@@ -23,6 +23,16 @@ const videos = {
 const MakeReady = () => {
   const [selected, setSelected] = useState(items[0].key);
   const videoUrl = videos[selected];
+  const videoRef = useRef(null);
+
+  const handleSelect = (key) => {
+    setSelected(key);
+    setTimeout(() => {
+      if (videoRef.current) {
+        videoRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
 
   return (
     <div className="lg:flex gap-8">
@@ -32,7 +42,7 @@ const MakeReady = () => {
           {items.map((item) => (
             <button
               key={item.key}
-              onClick={() => setSelected(item.key)}
+              onClick={() => handleSelect(item.key)}
               className={`px-4 py-2 rounded transition-colors font-medium text-left text-base focus:outline-none focus:ring-2 focus:ring-primario ${
                 selected === item.key
                   ? "bg-primario text-fondo shadow"
@@ -45,7 +55,7 @@ const MakeReady = () => {
           ))}
         </nav>
       </aside>
-      <section className="flex-1 min-w-0 flex flex-col items-center">
+      <section className="flex-1 min-w-0 flex flex-col items-center" ref={videoRef}>
         <h4 className="text-2xl font-bold text-primario mb-4">{items.find(i => i.key === selected)?.label}</h4>
         {videoUrl ? (
           <motion.div
