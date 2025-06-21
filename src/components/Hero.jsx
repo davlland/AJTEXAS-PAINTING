@@ -26,10 +26,14 @@ const Hero = () => (
         <div className="w-full lg:w-1/2 flex justify-center">
           <div className="relative">
             <div className="absolute -inset-4 bg-acento2 rounded-2xl transform rotate-3"></div>
-            <img
-              src="/images/foto-hero.jpeg"
-              alt="Pintores trabajando en condominio"
+            <video
+              src="/videos/logo-animado.mp4"
+              alt="Logo animado de AJTexas Painting"
               className="w-full max-w-lg rounded-xl shadow-xl relative transform hover:scale-105 transition-all duration-300"
+              autoPlay
+              loop
+              muted
+              playsInline
             />
           </div>
         </div>
