@@ -1,12 +1,22 @@
-# React + Vite
+Estimado profesorado y evaluadores,
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Me complace presentar la documentación completa de mi proyecto final de Front End, "[Desarrollo de un sitio web corporativo para la empresa de pintura y remodelación AJTexas Painting, construido como SPA con tecnologías modernas y un fuerte enfoque en rendimiento, accesibilidad y experiencia de usuario.]". Con el fin de facilitar su proceso de revisión, he centralizado y organizado toda la información relevante en el siguiente espacio de Notion.
 
-Currently, two official plugins are available:
+Encontrarán un detalle exhaustivo sobre:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+    Objetivos y Alcance del Proyecto: La visión general y las metas establecidas.
+    Diseño y Arquitectura: Las decisiones técnicas y estructurales.
+    Funcionalidades Implementadas: Una descripción clara de cada característica.
+    Tecnologías y Metodologías: Las herramientas y enfoques utilizados.
+    Guía de Ejecución: Instrucciones para desplegar y probar la aplicación.
+    Conclusiones y Aprendizajes: Reflexiones sobre el desarrollo y los desafíos superados.
 
-## Expanding the ESLint configuration
+Accedan a la documentación completa a través de este enlace:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+[https://www.notion.so/Proyecto-Final-21b9d70a110f8059918dffaa2c68d7ec?source=copy_link]
+
+Agradecemos de antemano su tiempo y dedicación para evaluar nuestro trabajo.
+
+Atentamente,
+
+[Daniel Jose Villegas Linarez]
