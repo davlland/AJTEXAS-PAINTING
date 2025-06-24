@@ -20,7 +20,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="hero relative py-20 bg-fondo">
+    <section className="hero relative py-0 bg-fondo">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
           {/* Texto principal */}
