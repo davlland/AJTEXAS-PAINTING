@@ -13,10 +13,10 @@ Encontrarán un detalle exhaustivo sobre:
 
 Accedan a la documentación completa a través de este enlace:
 
-[https://www.notion.so/Proyecto-Final-21b9d70a110f8059918dffaa2c68d7ec?source=copy_link]
+https://www.notion.so/Proyecto-Final-21b9d70a110f8059918dffaa2c68d7ec?source=copy_link
 
 Agradecemos de antemano su tiempo y dedicación para evaluar nuestro trabajo.
 
 Atentamente,
 
-[Daniel Jose Villegas Linarez]
+Daniel Jose Villegas Linarez
