@@ -22,7 +22,7 @@ const navLinks = [
   { to: "/color-picker", label: "Paleta de Colores" },
 ];
 
-const Header = ({ preHeaderReduced = false, preHeaderHeight = 128 }) => {
+const Header = ({ preHeaderReduced = false, preHeaderHeight = 128, reduced = false }) => {
   const isMobile = useMediaQuery('(max-width: 1023px)');
   const [menuOpen, setMenuOpen] = useState(false);
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -64,15 +64,23 @@ const Header = ({ preHeaderReduced = false, preHeaderHeight = 128 }) => {
       style={{
         top: `${preHeaderHeight}px`,
         transform: `translateY(${preHeaderReduced ? -preHeaderHeight/2 : 0}px)`,
-        transition: 'top 0.3s cubic-bezier(0.7,0,0.3,1), transform 0.3s cubic-bezier(0.7,0,0.3,1)',
+        transition: 'top 0.3s cubic-bezier(0.7,0,0.3,1), transform 0.3s cubic-bezier(0.7,0,0.3,1), height 0.3s cubic-bezier(0.7,0,0.3,1)',
         margin: 0,
         padding: 0,
         borderTop: 0,
+        height: reduced ? 44 : 64,
       }}
     >
-      <div className="max-w-7xl mx-auto px-2 sm:px-4 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-2 sm:px-4 flex items-center justify-between py-3"
+        style={{ transition: 'padding 0.3s cubic-bezier(0.7,0,0.3,1)' }}>
         <Link to="/" className="flex items-center gap-4" aria-label="Ir a inicio">
-          <img src="/images/logo.png" alt="AJ Texas Painting Logo" className="h-10 w-auto object-contain" />
+          <img src="/images/logo.png" alt="AJ Texas Painting Logo"
+            className="object-contain"
+            style={{
+              height: reduced ? 32 : 40,
+              transition: 'height 0.3s cubic-bezier(0.7,0,0.3,1)'
+            }}
+          />
           <h1 className="text-2xl font-bold bg-gradient-to-r from-primario to-secundario bg-clip-text text-transparent">AJ TEXAS PAINTING</h1>
         </Link>
         {isMobile ? (

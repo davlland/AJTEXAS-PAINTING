@@ -3,11 +3,10 @@ import './PreHeader.css';
 
 const PHONE = '+34 600 123 456';
 
-export default function PreHeader({ setReduced, setHeight }) {
+export default function PreHeader({ setReduced, setHeight, reduced }) {
   const preHeaderRef = useRef(null);
   const [headerHeight, setHeaderHeight] = useState(32);
-  const [preHeaderHeight, setPreHeaderHeight] = useState(128);
-  const [reduced, setReducedState] = useState(false);
+  const [preHeaderHeight, setPreHeaderHeight] = useState(96);
 
   useEffect(() => {
     function updateHeight() {
@@ -15,33 +14,18 @@ export default function PreHeader({ setReduced, setHeight }) {
       if (header) {
         const h = header.offsetHeight;
         setHeaderHeight(h);
-        setPreHeaderHeight(h * 3.9);
+        setPreHeaderHeight(h * 2.5);
         if (preHeaderRef.current) {
           preHeaderRef.current.style.setProperty('--header-height', `${h}px`);
-          preHeaderRef.current.style.setProperty('--preheader-height', `${h * 3.9}px`);
+          preHeaderRef.current.style.setProperty('--preheader-height', `${h * 2.5}px`);
         }
-        if (setHeight) setHeight(h * 3.9);
+        if (setHeight) setHeight(h * 2.5);
       }
     }
     updateHeight();
     window.addEventListener('resize', updateHeight);
     return () => window.removeEventListener('resize', updateHeight);
   }, [setHeight]);
-
-  useEffect(() => {
-    function onScroll() {
-      const scrollY = window.scrollY;
-      if (scrollY > preHeaderHeight && !reduced) {
-        setReducedState(true);
-        if (setReduced) setReduced(true);
-      } else if (scrollY <= preHeaderHeight && reduced) {
-        setReducedState(false);
-        if (setReduced) setReduced(false);
-      }
-    }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, [preHeaderHeight, reduced, setReduced]);
 
   const dynamicHeight = reduced ? preHeaderHeight / 2 : preHeaderHeight;
   const scale = reduced ? 0.5 : 1;
