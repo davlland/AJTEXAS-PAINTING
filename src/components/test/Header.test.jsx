@@ -23,6 +23,18 @@ test('abre y cierra el menú móvil al hacer clic en el botón hamburguesa', asy
   const menuButton = screen.getByLabelText(/abrir menú/i);
   fireEvent.click(menuButton);
 
+<<<<<<< HEAD
+=======
+  // Verifica que el menú está abierto (translate-x-0)
+  await waitFor(() => {
+    const navMenu = document.querySelector('nav.fixed');
+    expect(navMenu).toHaveClass('translate-x-0');
+  });
+
+  // Cierra el menú haciendo clic en el fondo oscuro
+  fireEvent.click(document.querySelector('.fixed.inset-0'));
+
+>>>>>>> dev
   // Espera a que el menú tenga la clase de oculto (translate-x-full)
   await waitFor(() => {
     const navMenu = document.querySelector('nav.fixed');
