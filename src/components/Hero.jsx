@@ -1,8 +1,11 @@
 import React, { useRef, useEffect } from 'react';
 import Button from './Button';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Hero = () => {
   const videoRef = useRef(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const video = videoRef.current;
@@ -18,6 +21,11 @@ const Hero = () => {
       };
     }
   }, []);
+
+  const handleServiciosClick = (e) => {
+    e.preventDefault();
+    navigate("/servicios/paint-texturing");
+  };
 
   return (
     <section className="hero relative py-0 bg-fondo">
@@ -35,7 +43,10 @@ const Hero = () => {
               <Button className="bg-primario text-fondo hover:bg-secundario transform hover:scale-105 transition-all duration-300">
                 Solicita una cotización
               </Button>
-              <Button className="bg-fondo text-primario border-2 border-primario hover:bg-acento2 hover:text-primario transform hover:scale-105 transition-all duration-300">
+              <Button
+                className="bg-fondo text-primario border-2 border-primario hover:bg-acento2 hover:text-primario transform hover:scale-105 transition-all duration-300"
+                onClick={handleServiciosClick}
+              >
                 Ver nuestros servicios
               </Button>
             </div>
