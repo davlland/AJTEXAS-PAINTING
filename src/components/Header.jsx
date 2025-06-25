@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import '../styles/globals.css';
+import '../styles/components.css';
 
 function useMediaQuery(query) {
   const [matches, setMatches] = useState(() => window.matchMedia(query).matches);
@@ -15,7 +17,6 @@ function useMediaQuery(query) {
 
 const navLinks = [
   { to: "/", label: "Inicio" },
-  { to: "/galeria", label: "Galería" },
   { to: "/sobre-nosotros", label: "Sobre Nosotros" },
   { to: "/contacto", label: "Contacto" },
   { to: "/trabaja", label: "Trabaja con Nosotros" },
@@ -73,8 +74,14 @@ const Header = ({ preHeaderReduced = false, preHeaderHeight = 128, reduced = fal
     >
       <div className="max-w-7xl h-full mx-auto px-2 sm:px-4 flex items-center justify-between"
         style={{ transition: 'padding 0.3s cubic-bezier(0.7,0,0.3,1)' }}>
-        <Link to="/" className="flex items-center gap-4" aria-label="Ir a inicio">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-primario to-secundario bg-clip-text text-transparent">AJ TEXAS PAINTING</h1>
+        <Link to="/" className="flex items-center gap-2 w-0 flex-1 min-w-0 overflow-hidden justify-center sm:w-auto sm:justify-start" aria-label="Ir a inicio">
+          <h1
+            className="font-bold brand-animated focus:outline-none text-center w-full sm:w-auto text-[0.95rem] sm:text-xl md:text-2xl leading-tight break-words px-2 truncate"
+            tabIndex={0}
+          >
+            AJ TEXAS PAINTING
+            <span className="brand-underline"></span>
+          </h1>
         </Link>
         {isMobile ? (
           <>

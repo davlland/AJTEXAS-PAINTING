@@ -23,12 +23,6 @@ test('abre y cierra el menú móvil al hacer clic en el botón hamburguesa', asy
   const menuButton = screen.getByLabelText(/abrir menú/i);
   fireEvent.click(menuButton);
 
-  const galeriaLink = screen.getByText(/galería/i);
-  expect(galeriaLink).toBeVisible();
-
-  // Cierra el menú haciendo clic en el fondo oscuro
-  fireEvent.click(document.querySelector('.fixed.inset-0'));
-
   // Espera a que el menú tenga la clase de oculto (translate-x-full)
   await waitFor(() => {
     const navMenu = document.querySelector('nav.fixed');

@@ -34,6 +34,9 @@ const ColorPicker = () => {
         params: { hex: color, mode, count, format: "json" },
       });
       setScheme(response.data);
+      if (response.data.colors && response.data.colors.length > 0) {
+        setColorInfo(response.data.colors[0]);
+      }
     } catch (err) {
       setError("Error al generar el esquema de colores");
       console.error(err);
@@ -67,7 +70,7 @@ const ColorPicker = () => {
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
             </div>
           ) : (
-            colorInfo && <ColorInfo color={colorInfo} />
+            colorInfo && <ColorInfo color={colorInfo} schemeColors={scheme?.colors || []} />
           )}
         </div>
       </div>
