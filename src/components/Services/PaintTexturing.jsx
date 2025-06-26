@@ -41,12 +41,14 @@ const PaintTexturing = () => {
   const videoRef = useRef(null);
   const h3Ref = useRef(null);
   const h4Ref = useRef(null);
+  const containerRef = useRef(null);
+  const [videoError, setVideoError] = useState(false);
 
   const handleSelect = (key) => {
     setSelected(key);
     setTimeout(() => {
-      if (h4Ref.current) {
-        h4Ref.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (containerRef.current) {
+        containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }, 100);
   };
@@ -56,7 +58,13 @@ const PaintTexturing = () => {
       videoRef.current.load();
       videoRef.current.play().catch(() => {});
     }
-  }, [videoUrl]);
+    if (selected && containerRef.current) {
+      setTimeout(() => {
+        containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+    setVideoError(false);
+  }, [selected, videoUrl]);
 
   return (
     <div className="lg:flex gap-8">
@@ -81,7 +89,7 @@ const PaintTexturing = () => {
       </aside>
       <section className="flex-1 min-w-0 flex flex-col items-center">
         {selected && (
-          <>
+          <div ref={containerRef} className="w-full flex flex-col items-center scroll-mt-32">
             <h4 ref={h4Ref} className="text-2xl font-bold text-primario mb-4">{items.find(i => i.key === selected)?.label}</h4>
             {videoUrl ? (
               <motion.div
@@ -106,15 +114,19 @@ const PaintTexturing = () => {
                     style={{ height: "31.25rem", maxHeight: "80vh" }}
                     whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
                     transition={{ duration: 0.4, ease: "ease" }}
+                    onError={() => setVideoError(true)}
                   >
                     Tu navegador no soporta la reproducción de video.
                   </motion.video>
+                  {videoError && (
+                    <div className="text-red-600 mt-2">No se pudo cargar el video. Verifica la ruta o el archivo.</div>
+                  )}
                 </div>
               </motion.div>
             ) : (
               <div className="text-neutroOscuro">Agrega la ruta del video para este servicio en el objeto <b>videos</b>.</div>
             )}
-          </>
+          </div>
         )}
       </section>
     </div>

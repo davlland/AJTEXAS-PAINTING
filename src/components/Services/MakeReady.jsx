@@ -24,12 +24,14 @@ const MakeReady = () => {
   const [selected, setSelected] = useState(items[0].key);
   const videoUrl = videos[selected];
   const videoRef = useRef(null);
+  const containerRef = useRef(null);
+  const [videoError, setVideoError] = useState(false);
 
   const handleSelect = (key) => {
     setSelected(key);
     setTimeout(() => {
-      if (videoRef.current) {
-        videoRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (containerRef.current) {
+        containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     }, 100);
   };
@@ -39,7 +41,13 @@ const MakeReady = () => {
       videoRef.current.load();
       videoRef.current.play().catch(() => {});
     }
-  }, [videoUrl]);
+    if (selected && containerRef.current) {
+      setTimeout(() => {
+        containerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 100);
+    }
+    setVideoError(false);
+  }, [selected, videoUrl]);
 
   return (
     <div className="lg:flex gap-8">
@@ -63,38 +71,44 @@ const MakeReady = () => {
         </nav>
       </aside>
       <section className="flex-1 min-w-0 flex flex-col items-center">
-        <h4 className="text-2xl font-bold text-primario mb-4">{items.find(i => i.key === selected)?.label}</h4>
-        {videoUrl ? (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.6 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="w-full flex justify-center"
-          >
-            <div
-              className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg bg-black p-6"
-              style={{
-                background: "linear-gradient(135deg, #e3f0ff 0%, #fafdff 100%)",
-                transition: "all 0.4s ease",
-              }}
+        <div ref={containerRef} className="w-full flex flex-col items-center scroll-mt-32">
+          <h4 className="text-2xl font-bold text-primario mb-4">{items.find(i => i.key === selected)?.label}</h4>
+          {videoUrl ? (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.6 }}
+              transition={{ duration: 0.7, ease: "easeOut" }}
+              className="w-full flex justify-center"
             >
-              <motion.video
-                ref={videoRef}
-                src={videoUrl}
-                controls
-                className="w-full"
-                style={{ height: "31.25rem", maxHeight: "80vh" }}
-                whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
-                transition={{ duration: 0.4, ease: "ease" }}
+              <div
+                className="w-full max-w-4xl mx-auto rounded-2xl overflow-hidden shadow-lg bg-black p-6"
+                style={{
+                  background: "linear-gradient(135deg, #e3f0ff 0%, #fafdff 100%)",
+                  transition: "all 0.4s ease",
+                }}
               >
-                Tu navegador no soporta la reproducción de video.
-              </motion.video>
-            </div>
-          </motion.div>
-        ) : (
-          <div className="text-neutroOscuro">Agrega la ruta del video para este servicio en el objeto <b>videos</b>.</div>
-        )}
+                <motion.video
+                  ref={videoRef}
+                  src={videoUrl}
+                  controls
+                  className="w-full"
+                  style={{ height: "31.25rem", maxHeight: "80vh" }}
+                  whileHover={{ scale: 1.05, filter: "brightness(1.1)" }}
+                  transition={{ duration: 0.4, ease: "ease" }}
+                  onError={() => setVideoError(true)}
+                >
+                  Tu navegador no soporta la reproducción de video.
+                </motion.video>
+                {videoError && (
+                  <div className="text-red-600 mt-2">No se pudo cargar el video. Verifica la ruta o el archivo.</div>
+                )}
+              </div>
+            </motion.div>
+          ) : (
+            <div className="text-neutroOscuro">Agrega la ruta del video para este servicio en el objeto <b>videos</b>.</div>
+          )}
+        </div>
       </section>
     </div>
   );

@@ -21,6 +21,21 @@ const Services = () => {
         <h2 className="text-3xl font-bold text-primario mb-6" tabIndex={-1} ref={h2Ref}>
           Servicios
         </h2>
+        <div className="flex gap-4 mb-8">
+          <a
+            href="/servicios/paint-texturing"
+            className="text-primario font-semibold underline underline-offset-4 hover:text-acento1 transition-colors"
+          >
+            Paint & Texturing
+          </a>
+          <span className="text-neutroOscuro">|</span>
+          <a
+            href="/servicios/make-ready"
+            className="text-primario font-semibold underline underline-offset-4 hover:text-acento1 transition-colors"
+          >
+            Make Ready
+          </a>
+        </div>
         {/* Menú eliminado según solicitud */}
         <Outlet />
       </div>
